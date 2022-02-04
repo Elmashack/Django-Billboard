@@ -1,0 +1,33 @@
+{% extends 'basic.html' %}
+
+{% block title %}{{ bb.title }} - {{ bb.rubric.name }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-3">
+	<div class="row">
+		{% if bb.image %}
+		<div class="col-md-auto">
+			<img src="{{ bb.image.url }}" style="width:300px" class="main-image" alt="{{ bb.title }}" >
+		</div>
+		{% endif %}
+		<div class="col">
+			<h2>{{ bb.title }}</h2>
+			<p>{{ bb.description }}</p>
+			<p class="font-weight-bold">{{ bb.price }}</p>
+			<p>{{ bb.contacts }}</p>
+			<p class="text-right font-italic">Добавлено {{ bb.created_at }}</p>
+		</div>
+	</div>
+</div>
+{% if add_imgs %}
+<div class="d-flex justify-content-between flex-wrap mt-5">
+	{% for miniature in add_imgs %}
+	<div>
+		<img class="additional-image" style="width:180px" src="{{ miniature.image.url }}">
+	</div>
+	{% endfor %}
+</div>
+{% endif %}
+<p><a href="{% url 'by_rubric' pk=bb.rubric.pk %}{{ all }}">Назад</a></p>
+{% endblock %}
+
